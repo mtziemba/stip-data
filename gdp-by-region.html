@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<title>STIP Visualizations - Summary Statistics</title>
+
+	<!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+   <!--  <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style> -->
+
+</head>
+<body>
+
+<!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="summarystats.html">Summary Statistics</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                    <li>
+                    	<a href="#">Test</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    
+	<div class="container">
+		<div class="page-header"><h1>Summary Statistics</h1></div>
+		<div class="row">
+  		<div class="col-xs-3">
+  			<div class="list-group">
+  				<a href="#" class="list-group-item active">GDP, PPP (Constant 2011 International$)</a>
+  				<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+  				<a href="#" class="list-group-item">Morbi leo risus</a>
+  				<a href="#" class="list-group-item">Porta ac consectetur ac</a>
+  				<a href="#" class="list-group-item">Vestibulum at eros</a>
+			</div>
+  		</div>
+  		<div class="col-xs-7">
+  			<ul class="nav nav-tabs">
+  				<li role="presentation"><a href="summarystats.html">All countries</a></li>
+  				<li role="presentation"><a href="gdp-USAID-countries.html">USAID Mission Countries</a></li>
+  				<li role="presentation" class="active"><a href="#">By Region</a></li>
+			</ul>
+  			<div id="myDiv" style="width:700px;height:800px;"></div>
+			<script>
+				function makeplot() {
+  Plotly.d3.csv("https://raw.githubusercontent.com/mtziemba/stip-data/master/GDP-countries-2015.csv", function(data){ processData(data) } );
+
+};
+
+function processData(allRows) {
+
+  var x = [], y = [], standard_deviation = []; var missionCountries = "Albania,Angola,Armenia,Azerbaijan,Bangladesh,Benin,Bosnia and Herzegovina,Brazil,Cambodia,China,Colombia,Dominican Republic,Egypt,El Salvador,Ethiopia,France,Georgia,Ghana,Guatemala,Guinea,Guyana,Haiti,Honduras,India,Indonesia,Jamaica,Japan,Jordan,Kazakhstan,Kenya,Korea- Rep.,Kosovo,Kyrgyz Republic,Lebanon,Liberia,Macedonia- FYR,Madagascar,Malawi,Mali,Mexico,Moldova,Morocco,Mozambique,Namibia,Nepal,Nicaragua,Nigeria,Norway,Pakistan,Paraguay,Peru,Philippines,Rwanda,Senegal,Serbia,Sierra Leone,South Africa,Sri Lanka,Tajikistan,Tanzania,Thailand,Tunisia,Turkmenistan,Uganda,Uzbekistan,Vietnam,Zambia".split(',');
+
+  for (var i=0; i<allRows.length; i++) {
+    row = allRows[i];
+      x.push( row['Country Name'] );
+    y.push( row['GDP (PPP in constant 2011 International $)'] );
+  }
+  makePlotly( x, y, standard_deviation );
+}
+
+function makePlotly( x, y, standard_deviation ){
+  var plotDiv = document.getElementById("plot");
+  var traces = [
+  {
+    y: x,
+    x: y,
+    type: 'bar',
+    orientation:'h'
+  }
+];
+
+  Plotly.newPlot('myDiv', traces,
+    {
+    	title: 'GDP by Region, PPP (Constant 2011 International $)'
+    });
+};
+  makeplot();
+				
+			</script>	
+
+			<div class="alert alert-info">Source: World Bank, International Comparison Program database. <br>
+			Data Year: 2015 <br>
+			Aggregation Method: Gap-filled total <br>
+			Base Period: 2011 <br>
+			Periodicity: Annual <br>
+			PPP GDP is gross domestic product converted to international dollars using purchasing power parity rates. An international dollar has the same purchasing power over GDP as the U.S. dollar has in the United States. GDP is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsidies not included in the value of the products. It is calculated without making deductions for depreciation of fabricated assets or for depletion and degradation of natural resources. Data are in constant 2011 international dollars.
+			</div>
+  		</div>
+	</div>
+	</div>
+	
+
+    
+	
+	
+    
+
+</body>
+</html>
