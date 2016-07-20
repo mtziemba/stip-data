@@ -64,7 +64,7 @@
 		<div class="row">
   		<div class="col-xs-3">
   			<div class="list-group">
-  				<a href="#" class="list-group-item">GDP, PPP (Constant 2011 International$)</a>
+  				<a href="summarystats.html" class="list-group-item">GDP, PPP (Constant 2011 International$)</a>
   				<a href="population-all.html" class="list-group-item">Population, Total</a>
   				<a href="#" class="list-group-item active">GDP Per Capita</a>
 			</div>
@@ -87,12 +87,8 @@ function processData(allRows) {
 
   for (var i=0; i<allRows.length; i++) {
     row = allRows[i];
-    if (missionCountries.indexOf(row['Country Name']) != -1) {
       x.push( row['Country Name'] );
-    y.push( row['GDP (PPP in constant 2011 International $)'] );
-    }
-    
-    
+      y.push( row['GDP per capita, PPP (constant 2011 international $)'] );
   }
   makePlotly( x, y, standard_deviation );
 }
@@ -110,7 +106,7 @@ function makePlotly( x, y, standard_deviation ){
 
   Plotly.newPlot('myDiv', traces,
     {
-    	title: 'GDP, PPP (Constant 2011 International $), USAID Mission Countries'
+    	title: 'GDP per capita, PPP (constant 2011 international $)'
     });
 };
   makeplot();
@@ -119,11 +115,7 @@ function makePlotly( x, y, standard_deviation ){
 
 			<div class="alert alert-info">Source: World Bank, International Comparison Program database. <br>
 			Data Year: 2015 <br>
-			Aggregation Method: Gap-filled total <br>
-			Base Period: 2011 <br>
-			Periodicity: Annual <br>
-			PPP GDP is gross domestic product converted to international dollars using purchasing power parity rates. An international dollar has the same purchasing power over GDP as the U.S. dollar has in the United States. GDP is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsidies not included in the value of the products. It is calculated without making deductions for depreciation of fabricated assets or for depletion and degradation of natural resources. Data are in constant 2011 international dollars.
-			</div>
+			GDP per capita based on purchasing power parity (PPP). PPP GDP is gross domestic product converted to international dollars using purchasing power parity rates. An international dollar has the same purchasing power over GDP as the U.S. dollar has in the United States. GDP at purchaser's prices is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsidies not included in the value of the products. It is calculated without making deductions for depreciation of fabricated assets or for depletion and degradation of natural resources. Data are in constant 2011 international dollars.<br>			</div>
   		</div>
 	</div>
 	</div>
