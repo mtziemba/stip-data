@@ -89,6 +89,7 @@ function processData(allRows) {
     row = allRows[i];
       x.push( row['Country Name'] );
       y.push( row["GDP per capita, PPP (constant 2011 international $)"] );
+      Console.log(typeof y);
   }
   makePlotly( x, y, standard_deviation );
 }
