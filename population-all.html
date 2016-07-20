@@ -1,1 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<title>STIP Visualizations - Summary Statistics</title>
 
+	<!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+   <!--  <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style> -->
+
+</head>
+<body>
+
+<!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="summarystats.html">Summary Statistics</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                    <li>
+                    	<a href="#">Test</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    
+	<div class="container">
+		<div class="page-header"><h1>Summary Statistics</h1></div>
+		<div class="row">
+  		<div class="col-xs-3">
+  			<div class="list-group">
+  				<a href="summarystats.html" class="list-group-item">GDP, PPP (Constant 2011 International$)</a>
+  				<a href="#" class="list-group-item active">Population, Total</a>
+  				<a href="gdp-per-capita-all.html" class="list-group-item">GDP Per Capita</a>
+			</div>
+  		</div>
+  		<div class="col-xs-7">
+  			<ul class="nav nav-tabs">
+  				<li role="presentation" class="active"><a href="summarystats.html">All countries</a></li>
+  				<li role="presentation"><a href="gdp-USAID-countries.html">USAID Mission Countries</a></li>
+  				<li role="presentation"><a href="gdp-by-income.html">By Income Group</a></li>
+			</ul>
+  			<div id="myDiv" style="width:700px;height:800px;"></div>
+			<script>
+				function makeplot() {
+  Plotly.d3.csv("https://raw.githubusercontent.com/mtziemba/stip-data/gh-pages/data/gdp-per-capita-and-population.csv", function(data){ processData(data) } );
+
+};
+
+function processData(allRows) {
+
+  var x = [], y = [], standard_deviation = []; var missionCountries = "Albania,Angola,Armenia,Azerbaijan,Bangladesh,Benin,Bosnia and Herzegovina,Brazil,Cambodia,China,Colombia,Dominican Republic,Egypt,El Salvador,Ethiopia,France,Georgia,Ghana,Guatemala,Guinea,Guyana,Haiti,Honduras,India,Indonesia,Jamaica,Japan,Jordan,Kazakhstan,Kenya,Korea- Rep.,Kosovo,Kyrgyz Republic,Lebanon,Liberia,Macedonia- FYR,Madagascar,Malawi,Mali,Mexico,Moldova,Morocco,Mozambique,Namibia,Nepal,Nicaragua,Nigeria,Norway,Pakistan,Paraguay,Peru,Philippines,Rwanda,Senegal,Serbia,Sierra Leone,South Africa,Sri Lanka,Tajikistan,Tanzania,Thailand,Tunisia,Turkmenistan,Uganda,Uzbekistan,Vietnam,Zambia".split(',');
+
+  for (var i=0; i<allRows.length; i++) {
+    row = allRows[i];
+    	x.push( row['Country Name'] );
+    y.push( row['Population, total'] );
+    
+  }
+  makePlotly( x, y, standard_deviation );
+}
+
+function makePlotly( x, y, standard_deviation ){
+  var plotDiv = document.getElementById("plot");
+  var traces = [
+  {
+    y: x,
+    x: y,
+    type: 'bar',
+    orientation:'h'
+  }
+];
+
+  Plotly.newPlot('myDiv', traces,
+    {
+    	title: 'Total Population'
+    });
+};
+  makeplot();
+				
+			</script>	
+
+			<div class="alert alert-info">Source: (1) United Nations Population Division. World Population Prospects, (2) Census reports and other statistical publications from national statistical offices, (3) Eurostat: Demographic Statistics, (4) United Nations Statistical Division. Population and Vital Statistics Report (various years), (5) U.S. Census Bureau: International Database, and (6) Secretariat of the Pacific Community: Statistics and Demography Programme. <br>
+			Data Year: 2015 <br>
+			Total population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.<br>
+      </div>
+  		</div>
+	</div>
+	</div>
+	
+
+    
+	
+	
+    
+
+</body>
+</html>
